@@ -1,0 +1,25 @@
+fastapi
+uvicorn
+os
+subprocess
+tempfile
+pydub
+time
+scipy
+numpy
+hashlib
+wave
+tempfile
+bcrypt
+datetime
+jose
+dotenv
+bson
+pymongo
+typing
+collections
+passlib
+
+
+
+pip install -r requirements.txt
