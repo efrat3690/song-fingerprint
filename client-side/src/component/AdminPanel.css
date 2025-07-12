@@ -1,0 +1,702 @@
+/* AdminPanel.css - Updated */
+
+/* צבעים - ייבוא מ-root אם נרצה להשתמש בהם ישירות כאן, או לוודא שהם גלובליים */
+:root {
+    --cyan: #00CFFF;
+    --indigo: #4B0082;
+    --purple: #9370DB;
+    --pinkish: #D870FF;
+}
+
+/* אנימציית קשת בענן (Rainbow Border) - נחוצה לכפתורים ורכיבים מסוימים */
+@keyframes rainbow-border {
+    0% {
+        border-image-source: linear-gradient(90deg, #00bcd4, #3f51b5, #9c27b0);
+    }
+    50% {
+        border-image-source: linear-gradient(90deg, #9c27b0, #00bcd4, #3f51b5);
+    }
+    100% {
+        border-image-source: linear-gradient(90deg, #00bcd4, #3f51b5, #9c27b0);
+    }
+}
+
+/* אנימציית קשת בענן לטקסט (Rainbow Animation) - נחוצה לכותרות */
+@keyframes rainbow-animation {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
+}
+
+/* אנימציית טעינה (Spinner) */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* אנימציית רעידה לשגיאות */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+
+/* עיצוב כללי של פאנל הניהול */
+.admin-panel {
+    font-family: 'Varela Round', sans-serif;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* מרכוז אופקי של כל התוכן */
+    padding-bottom: 3rem; /* רווח למטה כדי לאפשר גלילה נוחה */
+}
+
+/* כותרת עליונה - בדומה ל-top-bar/hero-section */
+.admin-header {
+    width: 100%;
+    background: linear-gradient(45deg, var(--purple), var(--pinkish));
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    position: sticky; /* נשאר בראש העמוד */
+    top: 0;
+    z-index: 100;
+}
+
+/* מרכוז הכותרת בתוך ההאדר */
+.admin-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(to right, #00bcd4, #3f51b5, #9c27b0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-animation 5s infinite linear;
+    margin: 0 auto; /* מרכוז הטקסט */
+    flex-grow: 1; /* מאפשר לו לתפוס מקום ולדחוף את הכפתור לצד */
+    text-align: center; /* מוודא שהטקסט עצמו ממורכז */
+}
+
+/* כפתור יציאה */
+.logout-button {
+    padding: 10px 20px;
+    background-color: white;
+    border: 2px solid;
+    border-image: linear-gradient(90deg, #00bcd4, #3f51b5, #9c27b0) 1;
+    animation: rainbow-border 3s linear infinite;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* רווח בין טקסט לאייקון */
+    flex-shrink: 0; /* מונע מהכפתור להתכווץ */
+}
+
+.logout-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logout-button:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+}
+
+/* תוכן הפאנל */
+.admin-content {
+    width: 90%;
+    max-width: 1200px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* מרכוז תוכן הפאנל עצמו */
+}
+
+/* הודעת שגיאה כללית */
+.admin-panel .error-message { /* ספציפיות גבוהה יותר כדי לדרוס */
+    background: linear-gradient(135deg, #fee, #fdd);
+    color: #d63384;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #f8d7da;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+    animation: shake 0.5s ease-in-out;
+    width: 100%; /* כדי שיקח את כל הרוחב המרבי */
+    max-width: 600px; /* רוחב מוגבל לשגיאות */
+}
+
+/* כפתור הוספת שיר חדש */
+.admin-actions {
+    display: flex;
+    justify-content: center; /* מרכוז הכפתור הוספה */
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.add-song-button {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, var(--purple), var(--pinkish));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-song-button:hover:not(:disabled) {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(147, 112, 219, 0.3);
+}
+
+.add-song-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.add-song-button:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+}
+
+/* טופס הוספת שיר (דומה למודל ההתחברות) */
+.add-form-container {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center; /* מרכוז הטופס */
+    width: 100%;
+}
+
+.form-card {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 24px;
+    border: 2px solid white;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(45deg, var(--cyan), var(--purple)) border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-card h3 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #00bcd4, #3f51b5, #9c27b0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-animation 5s infinite linear;
+}
+
+/* קבוצת שדות טופס */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+    text-align: right; /* יישור תווית לימין */
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: inherit;
+    text-align: right; /* יישור קלט לימין */
+    direction: rtl; /* כיוון כתיבה מימין לשמאל */
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-group input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* כפתורי פעולה בטפסים (הוספה/עריכה) */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    justify-content: center; /* מרכוז כפתורי הטופס */
+}
+
+.submit-button, .cancel-button {
+    flex: 1;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1rem;
+    min-height: 44px;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button {
+    background: linear-gradient(45deg, var(--purple), var(--pinkish));
+    color: white;
+}
+
+.submit-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(147, 112, 219, 0.4);
+    background: linear-gradient(45deg, #a569d1, #e085ff);
+}
+
+.cancel-button {
+    background: #f8f9fa;
+    color: #666;
+    border: 2px solid #dee2e6;
+}
+
+.cancel-button:hover:not(:disabled) {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    transform: translateY(-1px);
+}
+
+.submit-button:disabled, .cancel-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.submit-button::before, .cancel-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    z-index: 1; /* כדי שיופיע מעל הטקסט */
+}
+
+.submit-button:active::before, .cancel-button:active::before {
+    width: 300px;
+    height: 300px;
+}
+.submit-button span, .cancel-button span {
+    position: relative; /* כדי שהטקסט והאייקון יהיו מעל ה-::before */
+    z-index: 2;
+}
+
+/* אזור רשימת השירים */
+.songs-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: #f7f9fc;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.songs-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #00bcd4, #3f51b5, #9c27b0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-animation 5s infinite linear;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: #e3f2fd;
+    border-radius: 10px;
+    border: 2px dashed #90caf9;
+    color: #1e88e5;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    max-width: 600px; /* רוחב מוגבל להודעה */
+    margin-left: auto; /* מרכוז */
+    margin-right: auto; /* מרכוז */
+}
+
+.empty-state p {
+    margin: 0.5rem 0;
+}
+
+/* רשת השירים */
+.songs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+    justify-content: flex-end; /* יישור רשת השירים לימין */
+    direction: rtl; /* כדי שהכרטיסים יתחילו מימין לשמאל */
+    justify-items: end; /* יישור הכרטיסים עצמם לימין בתוך התא */
+}
+
+/* כרטיס שיר בודד */
+.song-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    text-align: right; /* יישור תוכן הכרטיס לימין */
+    direction: rtl; /* החזרת כיוון כתיבה לכרטיס עצמו */
+}
+
+.song-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.song-info {
+    margin-bottom: 15px;
+}
+
+.song-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--indigo);
+    margin-bottom: 8px;
+    word-break: break-word; /* לשבור מילים ארוכות */
+}
+
+.song-path {
+    font-size: 0.9rem;
+    color: #555;
+    word-break: break-all; /* לשבור נתיבים ארוכים */
+    direction: ltr; /* נתיבים באנגלית, אז יישור לשמאל */
+    text-align: left; /* יישור נתיב הקובץ לשמאל */
+}
+
+/* פעולות על שיר (עריכה/מחיקה) */
+.song-actions {
+    display: flex;
+    justify-content: flex-start; /* יישור כפתורי פעולה לשמאל (כיוון הכפתורים עצמם) */
+    gap: 10px;
+}
+
+.edit-button, .delete-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 40px; /* גודל מינימלי לכפתורים */
+    min-height: 40px;
+    color: white; /* טקסט לבן עבור הכפתורים החדשים */
+}
+
+.edit-button {
+    background: linear-gradient(45deg, var(--purple), var(--cyan)); /* גרדיאנט מהפרויקט */
+}
+
+.edit-button:hover {
+    background: linear-gradient(45deg, #a569d1, #00CFFF); /* גרדיאנט קצת שונה בהובר */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(147, 112, 219, 0.3);
+}
+
+.delete-button {
+    background: linear-gradient(45deg, var(--pinkish), var(--purple)); /* גרדיאנט מהפרויקט */
+}
+
+.delete-button:hover {
+    background: linear-gradient(45deg, #e085ff, #a569d1); /* גרדיאנט קצת שונה בהובר */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(216, 112, 255, 0.3);
+}
+
+
+.edit-button:focus-visible, .delete-button:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+}
+
+.delete-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* טופס עריכת שיר */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 10px; /* רווח מהכותרת */
+    text-align: right; /* יישור כללי לימין לטופס העריכה */
+    direction: rtl; /* כיוון כתיבה מימין לשמאל */
+}
+
+.edit-form .form-group input {
+    text-align: right;
+    direction: rtl;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* מרכוז כפתורי העריכה */
+}
+
+.save-button, .cancel-edit-button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.save-button {
+    background: linear-gradient(45deg, var(--purple), var(--pinkish));
+    color: white;
+    border: none;
+}
+
+.save-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(147, 112, 219, 0.3);
+}
+
+.cancel-edit-button {
+    background: #e9ecef;
+    color: #495057;
+    border: 1px solid #ced4da;
+}
+
+.cancel-edit-button:hover:not(:disabled) {
+    background-color: #dee2e6;
+    border-color: #adb5bd;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.save-button:disabled, .cancel-edit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.save-button:focus-visible, .cancel-edit-button:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+}
+
+/* מצב טעינה כללי */
+.admin-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, var(--purple), var(--pinkish));
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.admin-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ספינר בתוך כפתור מחיקה */
+.button-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* רספונסיביות */
+@media (max-width: 768px) {
+    .admin-header {
+        padding: 15px 20px;
+    }
+
+    .admin-title {
+        font-size: 2rem;
+    }
+
+    .logout-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .admin-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .add-song-button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+
+    .form-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .submit-button, .cancel-button {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .songs-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .songs-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .songs-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .song-card {
+        padding: 15px;
+    }
+
+    .song-name {
+        font-size: 1.1rem;
+    }
+
+    .song-path {
+        font-size: 0.8rem;
+    }
+
+    .edit-button, .delete-button {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .save-button, .cancel-edit-button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-title {
+        font-size: 1.8rem;
+    }
+
+    .logout-button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .admin-content {
+        padding: 10px;
+    }
+
+    .songs-grid {
+        grid-template-columns: 1fr; /* טור אחד במסכים קטנים מאוד */
+    }
+
+    .song-card {
+        max-width: 90%;
+        margin: auto;
+    }
+}

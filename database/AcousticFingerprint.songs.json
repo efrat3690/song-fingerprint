@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "686a617aec2456c0451454c7"
+  },
+  "song_name": "איציק דדיה - רוקדלי.mp3",
+  "file_path": "C:\\Users\\שרת\\Desktop\\music\\איציק דדיה - רוקדלי.mp3",
+  "num_finger": 109371
+},
+{
+  "_id": {
+    "$oid": "686a61fcec2456c045160003"
+  },
+  "song_name": "אביה שרמן הכל לטובה.mp3",
+  "file_path": "C:\\Users\\שרת\\Desktop\\music\\אביה שרמן הכל לטובה.mp3",
+  "num_finger": 148984
+}]

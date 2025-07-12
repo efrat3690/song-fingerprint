@@ -1,0 +1,741 @@
+/* צבעים */
+:root {
+  --cyan: #00CFFF;
+  --indigo: #4B0082;
+  --purple: #9370DB;
+  --pinkish: #D870FF;
+}
+
+/* עימוד כללי */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+}
+
+.app-container {
+  font-family: 'Varela Round', sans-serif;
+  min-height: 100vh;
+}
+
+.recorder-wrapper {
+  font-family: 'Varela Round', sans-serif;
+  text-align: center;
+  color: #333;
+  padding: 0rem;
+  background-color: #fff; /* רקע לבן בסיסי לחלק התחתון */
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* אפקט מלוכלך עדין */
+}
+
+/* פס עליון - גרדיאנט סגול */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(45deg, var(--purple), var(--pinkish));
+  padding: 10px 20px;
+  border-bottom: none;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.top-bar-logo {
+  height: 40px;
+  border-radius: 8px;
+}
+
+.login-container {
+  position: relative;
+}
+
+.login-button {
+  padding: 8px 16px;
+  background-color: white;
+  border: 2px solid;
+  border-image: linear-gradient(90deg, #00bcd4, #3f51b5, #9c27b0) 1;
+  animation: rainbow-border 3s linear infinite;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.login-button:hover {
+  transform: scale(1.05);
+}
+
+.login-dialog {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: white;
+  padding: 16px;
+  width: 220px;
+  border: 2px solid;
+  border-image: linear-gradient(90deg, #00bcd4, #3f51b5, #9c27b0) 1;
+  animation: rainbow-border 3s linear infinite;
+  color: black;
+  font-size: 14px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes rainbow-border {
+  0% {
+    border-image-source: linear-gradient(90deg, #00bcd4, #3f51b5, #9c27b0);
+  }
+
+  50% {
+    border-image-source: linear-gradient(90deg, #9c27b0, #00bcd4, #3f51b5);
+  }
+
+  100% {
+    border-image-source: linear-gradient(90deg, #00bcd4, #3f51b5, #9c27b0);
+  }
+}
+
+/* כל השאר - החל מ-hero-section ומטה - רקע לבן עם טקסטורה עדינה */
+.hero-section {
+  background-color: white; /* לבן מלוכלך בהיר */
+  background-repeat: repeat;
+  background-size: 6px 6px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); /* צל פנימי עדין */
+  text-align: center;
+  padding: 4rem 1rem 1rem;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0 0 20px 20px;
+}
+
+
+.main-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #00bcd4, #3f51b5, #9c27b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-animation 5s infinite linear;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #00bcd4, #3f51b5, #9c27b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-animation 5s infinite linear;
+}
+
+@keyframes rainbow-animation {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 100%;
+  }
+}
+
+.instructions-text {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* קבוצת כפתורים */
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* כפתור העלאת קובץ */
+.upload-button {
+  padding: 8px 20px;
+  background-color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s;
+  background: linear-gradient(to right, #00bcd4, #3f51b5, #9c27b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-border 3s linear infinite;
+  font-size: 1rem;
+}
+
+.upload-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* כפתור הקלטה */
+.record-button {
+  align-items: center;
+  width: 120px;
+  height: 140px;
+  border-radius: 60% / 60%;
+  background-color: #b187b1; /* לבן מלוכלך עדין */
+  border: 2px solid var(--purple);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+}
+
+.record-button:hover {
+  transform: scale(1.1);
+}
+
+.record-button img.logo-inside-button {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.record-button.recording {
+  transform: scale(1.2);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(235, 238, 239, 0.5);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(0, 191, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 191, 255, 0);
+  }
+}
+
+.recording-status {
+  font-weight: bold;
+  color: #333; /* שינוי לצבע כהה יותר כדי להתאים לרקע לבן */
+  margin-top: 0.5rem;
+}
+
+.recording-text {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+}
+
+
+.info-section {
+  background: url('../blacckk.png') center/cover fixed no-repeat;
+  color: white;
+  padding: 4rem 2rem; /* הגדלתי את הפדינג מלמעלה ומלמטה מ-2rem ל-4rem */
+  position: relative;
+  perspective: 1000px;
+  /* אופציונלי: */
+  /* min-height: 400px; */ /* אם רוצים להגדיר גובה מינימום */
+}
+
+.info-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: auto;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+/* נגן שמע */
+.audio-player {
+  margin: 3rem auto;
+}
+
+.audio-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.download-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--indigo);
+  text-decoration: underline;
+}
+
+/* טעינה/שגיאה */
+.loading-text,
+.error-text {
+  font-weight: bold;
+  margin: 2rem;
+  font-size: 1.2rem;
+}
+
+.no-results-text {
+  font-weight: bold;
+  color: #ffffff;
+  margin: 2rem;
+  font-size: 1.2rem;
+}
+
+/* אזור תוצאות */
+.results-section {
+  background: white;
+  padding: 1rem 1rem;
+}
+
+.song-list {
+  list-style: none;
+  padding: 0;
+}
+
+.match-item {
+  background: #f7f7f7;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.song-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.song-info {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* אזור ביקורות */
+.reviews-section {
+  background: linear-gradient(45deg, var(--purple), var(--pinkish));
+  color: white;
+  padding: 3rem 1rem;
+  margin-top: 3rem;
+  overflow: hidden;
+}
+
+.review-carousel {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.review-slide {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
+}
+
+.review {
+  flex: 0 0 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.share-us {
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 1rem;
+}
+
+.share-us a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+}
+
+.share-us a:hover {
+  color: white;
+  text-decoration: none;
+}
+/* אנימציה להודעות אין תוצאה */
+.no-results-text {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* מודל התחברות - עיצוב מסודר */
+
+/* רקע המודל */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* תוכן המודל */
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: modalSlideIn 0.3s ease-out;
+  border: 2px solid white;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(45deg, var(--cyan), var(--purple)) border-box;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* כותרת המודל */
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: first baseline;
+  padding: 20px 24px;
+  background: linear-gradient(45deg, var(--purple), var(--pinkish));
+  color: white;
+  position: relative;
+}
+
+.modal-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, var(--purple), var(--pinkish));
+  opacity: 0.9;
+  z-index: -1;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  background: none;
+  -webkit-text-fill-color: white;
+  animation: none;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* כפתור סגירה */
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.close-button:active {
+  transform: scale(0.95);
+}
+
+/* טופס ההתחברות */
+.login-form {
+  padding: 24px;
+  background: white;
+}
+
+/* קבוצת שדות */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+  text-align: right;
+}
+
+/* שדה קלט */
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+  text-align: right;
+  direction: rtl;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-group input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-group input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* הודעת שגיאה */
+.error-message {
+  background: linear-gradient(135deg, #fee, #fdd);
+  color: #d63384;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #f8d7da;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* פעולות הטופס */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* כפתור שליחה */
+.submit-button {
+  flex: 1;
+  background: linear-gradient(45deg, var(--purple), var(--pinkish));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  min-height: 44px;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(147, 112, 219, 0.4);
+  background: linear-gradient(45deg, #a569d1, #e085ff);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* כפתור ביטול */
+.cancel-button {
+  flex: 1;
+  background: #f8f9fa;
+  color: #666;
+  border: 2px solid #dee2e6;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  min-height: 44px;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+  transform: translateY(-1px);
+}
+
+.cancel-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.cancel-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* אנימציית טעינה */
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* רספונסיביות */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+    margin: 0 16px;
+    border-radius: 12px;
+  }
+
+  .modal-header {
+    padding: 16px 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .login-form {
+    padding: 20px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .submit-button,
+  .cancel-button {
+    width: 100%;
+  }
+}
+
+/* אפקטים נוספים */
+.modal-content:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* פוקוס נגישות */
+.submit-button:focus-visible,
+.cancel-button:focus-visible,
+.close-button:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+
+.form-group input:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+
+/* אנימציה לכפתורים */
+.submit-button,
+.cancel-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button::before,
+.cancel-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.submit-button:active::before,
+.cancel-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+
+
